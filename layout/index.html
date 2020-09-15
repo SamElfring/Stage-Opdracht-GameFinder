@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="nl">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Game Finder</title>
+		<link rel="stylesheet" href="style.css">
+		<script src="../node_modules/vue/dist/vue.min.js"></script>
+		<script src="../node_modules/axios/dist/axios.min.js"></script>
+		<script src="../node_modules/jquery/dist/jquery.min.js"></script>
+	</head>
+	<body>
+		<div class="app">
+			<div class="topBar">
+				<div class="title">
+					<p>Game Finder</p>
+				</div>
+				<div class="topBarFilters"></div>
+			</div>
+			<div class="blackBar"></div>
+			<div class="gameFinding">
+				<div class="filters">
+					<div class="filter" id="nameFilter">
+						<p class="filterTitles">Naam van spel:</p>
+						<input type="text" v-model="searchGame" @change="GameSearch(false)">
+					</div>
+					<div class="filter" id="limitFilter" v-bind:title="zeroMessage">
+						<p>Max. aantal resultaten:</p>
+						<input type="text" v-model="limitResults" @change="GameSearch(false)">
+					</div>
+					<div class="filter" id="ratingFilter" v-bind:title="zeroMessage">
+						<p>Minimale rating:</p>
+						<input type="text" v-model="minimalRating" @change="GameSearch(false)"> / 10
+					</div>
+					<div class="filter" id="dateFilter">
+						<p>Release datum:</p>
+						<select name="dateSelect" id="dateSelect" v-model="dateSelect" @change="GameSearch(false)">
+							<option value="geen">Niet filteren</option>
+							<option value="voor">Voor</option>
+							<option value="na">Na</option>
+							<option value="tussen">Tussen</option>
+						</select>
+						<input type="text" v-if="dateSelect != 'geen'" placeholder="YYYY" v-model="dateInput" @change="GameSearch(false)">
+						<input type="text" v-if="dateSelect != 'geen' && dateSelect == 'tussen'" placeholder="YYYY" v-model="dateInputBetween" @change="GameSearch">
+					</div>
+					<div class="filter" id="platformFilter">
+						<p class="filterTitles">Kies een platform:</p>
+						<select name="platform" id="platforms" v-model="platformSelect" @change="GameSearch(false)">
+							<option value="all">Alles</option>
+							<option value="6">PC</option>
+							<option value="48">Playstation 4</option>
+							<option value="5">Wii</option>
+							<option value="9">Playstation 3</option>
+						</select>
+					</div>
+					<div class="filter" id="sorteerFilter">
+						<p class="filterTitles">Kies filter om op te sorteren:</p>
+						<select name="sorteer" id="sorteer" v-model="sortSelect" @change="GameSearch(false)">
+							<option value="none">Geen</option>
+							<option value="rating">Rating</option>
+							<option value="date">Release Datum</option>
+							<option value="name">Naam</option>
+						</select>
+					</div>
+				</div>
+				<div class="blackBar"></div>
+				<div class="searchButton">
+					<button @click="GameSearch(false)" id="searchButtonID">Zoek naar spellen!</button>
+				</div>
+				<div class="blackBar"></div>
+				<div class="resultsDiv">
+					<p style="text-align: end;">Aantal Resultaten: {{ numberOfResults }}</p>
+					<div class="noResult" v-if="noResult">
+						<p>Geen spellen gevonden</p>
+					</div>
+					<div class="results" v-for="item in arrayResponse" v-if="arrayResponse.length != 0 && !noResult" @click="ShowGameSelect(item.name)">
+						<div class="result">
+							<p class="textOverflowResult" id="nameResult">{{ item.name }}</p>
+							<p id="filterName">Naam</p>
+						</div>
+						<div class="result">
+							<img :src="item.url" onerror="this.src='onerrorIMG.png'">
+							<p id="filterName">Cover</p>
+						</div>
+						<div class="result">
+							<p class="textOverflowResult" id="genreResult">{{ item.genre }}</p>
+							<p id="filterName">Genre(s)</p>
+						</div>
+						<div class="result">
+							<p class="textOverflowResult" id="dateResult">{{ item.date }}</p>
+							<p id="filterName">Release Datum</p>
+						</div>
+						<div class="result">
+							<p class="textOverflowResult" id="companyResult">{{ item.company }}</p>
+							<p id="filterName">Makers</p>
+						</div>
+						<div class="result">
+							<p class="textOverflowResult" id="platformResult">{{ item.platform }}</p>
+							<p id="filterName">Platformen</p>
+						</div>
+						<div class="result">
+							<p class="textOverflowResult" id="ratingResult">{{ item.rating }}</p>
+							<p id="filterName">Rating</p>
+						</div>
+						<div :id="item.name" class="gameSelect" v-show>
+							<div class="gameSelectDiv">
+								<div id="gameSelectTop">
+									<img :src="item.url" onerror="this.src='onerrorIMG.png'">
+									<p id="gameSelectName">{{ item.name }}</p>
+								</div>
+								<div id="gameSelectRating">
+									<p>Rating:</p>
+									<p>{{ item.rating }}</p>
+								</div>
+								<div id="gameSelectGenre">
+									<p>Genre('s):</p>
+									<p>{{ item.genre }}</p>
+								</div>
+								<div id="gameSelectDate">
+									<p>Release Datum:</p>
+									<p>{{ item.date }}</p>
+								</div>
+								<div id="gameSelectCompany">
+									<p>Makers:</p>
+									<p>{{ item.company }}</p>
+								</div>
+								<div id="gameSelectPlatform">
+									<p>Platformen:</p>
+									<p>{{ item.platform }}</p>
+								</div>
+								<div id="gameSelectScreenshots">
+									<p>Screenshots:</p>
+									<div id="screenshots" v-for="screenshot in item.screenshots.slice(0,4)">
+										<img :src="screenshot" alt="Geen screenshots gevonden">
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script src="app.js"></script>
+	</body>
+</html>
