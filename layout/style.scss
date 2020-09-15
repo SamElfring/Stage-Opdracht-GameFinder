@@ -139,21 +139,26 @@
 						padding: 1%;
 						div {
 							padding: 2%;
-							border-bottom: 0.2vh solid black;
 						}
 						p {
 							padding: 1%;
 						}
-						#gameSelectTop {
+						.gameSelectMiddle {
 							display: flex;
 							justify-content: space-evenly;
-							padding: 0 20%;
-							p {
-								padding-top: 5%;
+							align-items: center;
+							border-bottom: 0.2vh solid black;
+							div {
+								width: 100%;
+								img {
+									width: 60%;
+									padding-bottom: 1%;
+								}
 							}
-							img {
-								width: 20%;
-								padding-bottom: 1%;
+							#gameSelectSummary {
+								#gameSelectSummaryText {
+									color: #dfdfdf;
+								}
 							}
 						}
 						#gameSelectScreenshots {

@@ -53,7 +53,7 @@ var app = new Vue({
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',
-                    'user-key': 'vul-hier-je-eigen-key-in'
+                    'user-key': '4a747b3742d8c95f07ec185f1a0e3d33'
                 },
                 // Set data that the api returns
                 data: "fields name,genres.name,summary,rating,popularity,platforms,game_engines.name,release_dates.human,release_dates.date,category,involved_companies.company.name,cover.url,screenshots.url,platforms.abbreviation;" +
@@ -207,6 +207,9 @@ var app = new Vue({
                         }
                     } catch(err){var genre = "Onbekend"};
                     try {
+                        var summary = response[i].summary;
+                    } catch(err){var summary = "Geen beschrijving beschikbaar."};
+                    try {
                         var date = response[i].release_dates[0].human;
                     } catch(err){var date = "Onbekend"};
                     try {
@@ -237,7 +240,8 @@ var app = new Vue({
                         company: company,
                         platform: platform,
                         rating: rating,
-                        screenshots: screenshots
+                        screenshots: screenshots,
+                        summary: summary
                     });
                     i++;
                 } while (i < response.length);

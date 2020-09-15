@@ -170,30 +170,36 @@
 
 .app .gameFinding .resultsDiv .results .gameSelect .gameSelectDiv div {
   padding: 2%;
-  border-bottom: 0.2vh solid black;
 }
 
 .app .gameFinding .resultsDiv .results .gameSelect .gameSelectDiv p {
   padding: 1%;
 }
 
-.app .gameFinding .resultsDiv .results .gameSelect .gameSelectDiv #gameSelectTop {
+.app .gameFinding .resultsDiv .results .gameSelect .gameSelectDiv .gameSelectMiddle {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: space-evenly;
       -ms-flex-pack: space-evenly;
           justify-content: space-evenly;
-  padding: 0 20%;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  border-bottom: 0.2vh solid black;
 }
 
-.app .gameFinding .resultsDiv .results .gameSelect .gameSelectDiv #gameSelectTop p {
-  padding-top: 5%;
+.app .gameFinding .resultsDiv .results .gameSelect .gameSelectDiv .gameSelectMiddle div {
+  width: 100%;
 }
 
-.app .gameFinding .resultsDiv .results .gameSelect .gameSelectDiv #gameSelectTop img {
-  width: 20%;
+.app .gameFinding .resultsDiv .results .gameSelect .gameSelectDiv .gameSelectMiddle div img {
+  width: 60%;
   padding-bottom: 1%;
+}
+
+.app .gameFinding .resultsDiv .results .gameSelect .gameSelectDiv .gameSelectMiddle #gameSelectSummary #gameSelectSummaryText {
+  color: #dfdfdf;
 }
 
 .app .gameFinding .resultsDiv .results .gameSelect .gameSelectDiv #gameSelectScreenshots {
