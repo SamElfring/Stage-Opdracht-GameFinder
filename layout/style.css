@@ -105,6 +105,7 @@
   -webkit-box-shadow: 0.7vh 0.7vh rgba(0, 0, 0, 0.1);
           box-shadow: 0.7vh 0.7vh rgba(0, 0, 0, 0.1);
   width: 400px;
+  height: 263.3px;
   background: royalblue;
   border: black 0.1vh solid;
   border-bottom: none;
@@ -158,25 +159,32 @@
   height: -moz-fit-content;
   height: fit-content;
   width: 50%;
-  background: -webkit-gradient(linear, left bottom, left top, from(royalblue), to(#6380d8));
-  background: linear-gradient(to top, royalblue, #6380d8);
-  border: 0.3vh solid black;
-  border-radius: 1vh;
+  background-repeat: no-repeat;
+  background-size: cover;
   color: #fff;
   text-align: center;
   font-size: 120%;
+  margin: 10px;
+}
+
+.app .gameFinding .resultsDiv .results .gameSelect .gameSelectDiv .blackOpacity {
+  border: 0.3vh solid black;
+  border-collapse: collapse;
+  height: 100%;
+  width: 99.5%;
+  max-width: 100%;
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.app .gameFinding .resultsDiv .results .gameSelect .gameSelectDiv .blackOpacity div {
+  padding: 10px;
+}
+
+.app .gameFinding .resultsDiv .results .gameSelect .gameSelectDiv .blackOpacity p {
   padding: 1%;
 }
 
-.app .gameFinding .resultsDiv .results .gameSelect .gameSelectDiv div {
-  padding: 2%;
-}
-
-.app .gameFinding .resultsDiv .results .gameSelect .gameSelectDiv p {
-  padding: 1%;
-}
-
-.app .gameFinding .resultsDiv .results .gameSelect .gameSelectDiv .gameSelectMiddle {
+.app .gameFinding .resultsDiv .results .gameSelect .gameSelectDiv .blackOpacity .gameSelectMiddle {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -189,31 +197,29 @@
   border-bottom: 0.2vh solid black;
 }
 
-.app .gameFinding .resultsDiv .results .gameSelect .gameSelectDiv .gameSelectMiddle div {
+.app .gameFinding .resultsDiv .results .gameSelect .gameSelectDiv .blackOpacity .gameSelectMiddle div {
   width: 100%;
 }
 
-.app .gameFinding .resultsDiv .results .gameSelect .gameSelectDiv .gameSelectMiddle div img {
+.app .gameFinding .resultsDiv .results .gameSelect .gameSelectDiv .blackOpacity .gameSelectMiddle div img {
   width: 60%;
-  padding-bottom: 1%;
 }
 
-.app .gameFinding .resultsDiv .results .gameSelect .gameSelectDiv .gameSelectMiddle #gameSelectSummary #gameSelectSummaryText {
+.app .gameFinding .resultsDiv .results .gameSelect .gameSelectDiv .blackOpacity .gameSelectMiddle #gameSelectSummary #gameSelectSummaryText {
   color: #dfdfdf;
 }
 
-.app .gameFinding .resultsDiv .results .gameSelect .gameSelectDiv #gameSelectScreenshots {
+.app .gameFinding .resultsDiv .results .gameSelect .gameSelectDiv .blackOpacity #gameSelectScreenshots {
   overflow: auto;
   border: none;
 }
 
-.app .gameFinding .resultsDiv .results .gameSelect .gameSelectDiv #gameSelectScreenshots #screenshots {
+.app .gameFinding .resultsDiv .results .gameSelect .gameSelectDiv .blackOpacity #gameSelectScreenshots #screenshots {
   border: none;
   display: inline-block;
-  padding: 0 3%;
 }
 
-.app .gameFinding .resultsDiv .results .gameSelect .gameSelectDiv #gameSelectScreenshots #screenshots img {
+.app .gameFinding .resultsDiv .results .gameSelect .gameSelectDiv .blackOpacity #gameSelectScreenshots #screenshots img {
   width: 100%;
 }
 

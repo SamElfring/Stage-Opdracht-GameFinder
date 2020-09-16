@@ -103,49 +103,51 @@
 							<p id="filterName">Rating</p>
 						</div>
 						<div :id="item.name" class="gameSelect" v-show>
-							<div class="gameSelectDiv">
-								<div class="gameSelectMiddle">
-									<div>
-										<img :src="item.url" onerror="this.src='onerrorIMG.png'">
+							<div class="gameSelectDiv" :style="{ backgroundImage: 'url(' + item.screenshotsGameSelect + ')' }">
+								<div class="blackOpacity">
+									<div class="gameSelectMiddle">
+										<div>
+											<img :src="item.coverGameSelect" onerror="this.src='onerrorIMG.png'">
+										</div>
+										<div>
+											<p id="gameSelectName">{{ item.name }}</p>
+										</div>
+										<div id="gameSelectRating">
+											<p>Rating:</p>
+											<p>{{ item.rating }}</p>
+										</div>
 									</div>
-									<div>
-										<p id="gameSelectName">{{ item.name }}</p>
+									<div class="gameSelectMiddle">
+										<div id="gameSelectDate">
+											<p>Release Datum:</p>
+											<p>{{ item.date }}</p>
+										</div>
+										<div id="gameSelectGenre">
+											<p>Genre('s):</p>
+											<p>{{ item.genre }}</p>
+										</div>
 									</div>
-									<div id="gameSelectRating">
-										<p>Rating:</p>
-										<p>{{ item.rating }}</p>
+									<div class="gameSelectMiddle">
+										<div id="gameSelectCompany">
+											<p>Makers:</p>
+											<p>{{ item.company }}</p>
+										</div>
+										<div id="gameSelectPlatform">
+											<p>Platformen:</p>
+											<p>{{ item.platform }}</p>
+										</div>
 									</div>
-								</div>
-								<div class="gameSelectMiddle">
-									<div id="gameSelectDate">
-										<p>Release Datum:</p>
-										<p>{{ item.date }}</p>
+									<div class="gameSelectMiddle"  v-if="item.summary">
+										<div id="gameSelectSummary">
+											<p>Beschrijving:</p>
+											<p id="gameSelectSummaryText">{{ item.summary }}</p>
+										</div>
 									</div>
-									<div id="gameSelectGenre">
-										<p>Genre('s):</p>
-										<p>{{ item.genre }}</p>
-									</div>
-								</div>
-								<div class="gameSelectMiddle">
-									<div id="gameSelectCompany">
-										<p>Makers:</p>
-										<p>{{ item.company }}</p>
-									</div>
-									<div id="gameSelectPlatform">
-										<p>Platformen:</p>
-										<p>{{ item.platform }}</p>
-									</div>
-								</div>
-								<div class="gameSelectMiddle"  v-if="item.summary">
-									<div id="gameSelectSummary">
-										<p>Beschrijving:</p>
-										<p id="gameSelectSummaryText">{{ item.summary }}</p>
-									</div>
-								</div>
-								<div id="gameSelectScreenshots" v-if="item.screenshots">
-									<p>Screenshots:</p>
-									<div id="screenshots" v-for="screenshot in item.screenshots.slice(0,4)">
-										<img :src="screenshot" alt="Screenshot niet beschikbaar">
+									<div id="gameSelectScreenshots" v-if="item.screenshots">
+										<p>Screenshots:</p>
+										<div id="screenshots" v-for="screenshot in item.screenshots.slice(0,4)">
+											<img :src="screenshot" alt="Screenshot niet beschikbaar">
+										</div>
 									</div>
 								</div>
 							</div>

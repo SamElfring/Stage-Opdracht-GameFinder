@@ -1,11 +1,11 @@
 var app = new Vue({
     el: '.app',
     data: {
-        searchGame: "Minecraft",        // v-model input filter: Naam van spel.
+        searchGame: "",        // v-model input filter: Naam van spel.
         response: [],                   // Array that returns after calling api.
         arrayResponse: '',              // Array with the results that show on page.
         platformSelect: 'all',          // Select input for platform.
-        limitResults: 10,               // Limit the amount of results.
+        limitResults: 20,               // Limit the amount of results.
         zeroMessage: "Zet op '0' als je alle resultaten wilt zien!", // Message that shows when hovering over inputs.
         minimalRating: 0,               // Shows only games above this minimal.
         noResult: false,                // If the api returns nothing.
@@ -185,14 +185,20 @@ var app = new Vue({
                     } catch(err){var name = "Onbekend"};                    // If no value is found set to "Onbekend".
                     try {
                         var url = response[i].cover.url;
-                    } catch(err){var url = ""};
+                        var coverGameSelect = url.split("/");
+                        coverGameSelect[6] = "t_cover_big";                             // Getting the bigger cover
+                        coverGameSelect = coverGameSelect.join("/");
+                    } catch(err){var url = ""; var coverGameSelect = ""};
                     try {
                         var screenshotsLength = response[i].screenshots;
                         var screenshots = [];
                         for (var s = 0; s < screenshotsLength.length; s++) {
                             screenshots.push(response[i].screenshots[s].url);
                         }
-                    } catch(err){var screenshots = ""}
+                        var screenshotsGameSelect = screenshots[0].split("/");
+                        screenshotsGameSelect[6] = "t_screenshot_huge";
+                        screenshotsGameSelect = screenshotsGameSelect.join("/");
+                    } catch(err){var screenshots = ""; var screenshotsGameSelect = "";}
                     try {
                         var genre = "";
                         var genreLength = response[i].genres.length;
@@ -241,7 +247,9 @@ var app = new Vue({
                         platform: platform,
                         rating: rating,
                         screenshots: screenshots,
-                        summary: summary
+                        summary: summary,
+                        coverGameSelect: coverGameSelect,
+                        screenshotsGameSelect: screenshotsGameSelect
                     });
                     i++;
                 } while (i < response.length);
@@ -249,55 +257,49 @@ var app = new Vue({
                 this.noResult = true;               // If theres no result set 'noResult' to true.
             }
             this.arrayResponse = array;
-            if (this.sortSelect == "rating")
-            this.SortArrayRating;
-            else if (this.sortSelect == "date")
-            this.SortArrayDate;
-            else if (this.sortSelect == "name")
-            this.SortArrayName;
-        },
-        SortArrayRating: function() {
-            if (this.minimalRating > 0) {
-                var array = this.arrayResponse;
-                array.sort(function(a, b) {return b.rating - a.rating});
-                for (var i = 0; i < array.length; i++) {
-                    if (array[i].rating != "Onbekend")
-                    array[i].rating += " / 10";
-                }
-            } else {
-                this.sortSelect = "none";
-                alert("Om te sorteren op rating moet u een minimale rating aangeven!");
+            if (this.sortSelect != ""){
+            this.SortArray;}
+
+            for (var i = 0; i < this.arrayResponse.length; i++) {
+                if (this.arrayResponse[i].rating != "Onbekend")
+                this.arrayResponse[i].rating += " / 10";
             }
         },
-        SortArrayDate: function() {
-            if (this.numberOfResults > 0) {
+        SortArray: function() {
+            if (this.sortSelect == "rating") {
+                if (this.minimalRating > 0) {
+                    var array = this.arrayResponse;
+                    array.sort(function(a, b) {
+                        return b.rating - a.rating;
+                    });
+                } else {
+                    this.sortSelect = "none";
+                    alert("Om te sorteren op rating moet u een minimale rating aangeven!");
+                }
+            }
+            if (this.sortSelect == "date" && this.numberOfResults > 0) {
                 var array = this.arrayResponse;
                 array.sort(function(a, b) {
                     a = new Date(a.date);
                     b = new Date(b.date);
-                    console.log(a);
-                    console.log(b);
                     return a - b;
                 });
             }
+            if (this.sortSelect == "name") {
+                this.arrayResponse.sort(function(a,b) {
+                    var x = a.name.toLowerCase();
+                    var y = b.name.toLowerCase();
+                    if (x < y) {return -1};
+                    if (x > y) {return 1};
+                    return 0;
+                });
+            }
         },
-        SortArrayName: function() {
-            var array = this.arrayResponse;
-            var nameArray = [];
-            for (var i = 0; i < array.length; i++) {
-                nameArray.push(array[i].name);
-            }
-            nameArray.sort();
-            for (var j = 0; j < array.length; j++) {
-                array[j].name = nameArray[j];
-            }
-        }
     },
     created: function() {               // Calls GameSearch function when page is loaded.
         this.GameSearch();
     }
 });
-
 window.onhashchange = function() {      // Calls GameSearch function when URL is changed.
     app.GameSearch(true);
 }
