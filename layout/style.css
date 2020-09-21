@@ -1,146 +1,127 @@
 @import url("https://fonts.googleapis.com/css2?family=Ubuntu&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 * {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
 }
 
 .app {
-  font-family: 'Ubuntu', sans-serif;
-  height: 100vh;
+  font-family: "Ubuntu", sans-serif;
   width: 100vw;
-  max-width: 100%;
-  max-height: 100%;
-  background: -webkit-gradient(linear, left top, left bottom, from(lightgray), to(#a7a4a4));
+  height: 100vh;
   background: linear-gradient(to bottom, lightgray, #a7a4a4);
   overflow: hidden;
 }
-
 .app .topBar {
   width: 100%;
-  height: 4%;
+  height: 3rem;
   background: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-
 .app .topBar .title {
   text-align: center;
-  padding: 0.8vh;
-  font-size: 2vh;
+  font-size: 150%;
 }
-
-.app .blackBar {
-  width: 100%;
-  height: 0.25%;
-  background: #000;
-}
-
 .app .gameFinding {
-  height: 95.7%;
-  width: 100%;
-}
-
-.app .gameFinding .filters {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  text-align: center;
-  padding: 1%;
-  width: 98%;
-  height: 5%;
-  background: royalblue;
-  color: #fff;
-}
-
-.app .gameFinding .filters .filter {
   height: 100%;
   width: 100%;
 }
-
+.app .gameFinding .filters {
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  border: 0.2rem solid black;
+  border-left: none;
+  border-right: none;
+  text-align: center;
+  width: 100%;
+  height: fit-content;
+  background: royalblue;
+  color: #fff;
+}
+.app .gameFinding .filters .filter {
+  padding: 1%;
+}
 .app .gameFinding .filters .filter input, .app .gameFinding .filters .filter select {
   margin-top: 3%;
 }
-
 .app .gameFinding .filters .filter input {
   padding-left: 2%;
 }
-
 .app .gameFinding .filters #dateFilter input {
   width: 20%;
 }
-
 .app .gameFinding .filters #ratingFilter input {
   width: 40%;
   text-align: right;
   padding-right: 2%;
 }
-
 .app .gameFinding .searchButton {
-  height: 2.5%;
+  height: 2rem;
   width: 100%;
+  border-bottom: 0.2rem solid black;
 }
-
 .app .gameFinding .searchButton #searchButtonID {
   color: #fff;
   height: 100%;
   width: 100%;
   border: none;
-  font-size: 1.5vh;
+  font-size: 120%;
   font-weight: 900;
   background: lightslategray;
 }
-
 .app .gameFinding .searchButton #searchButtonID:hover {
   background: #2856e3;
 }
-
 .app .gameFinding .resultsDiv {
+  display: flex;
+  flex-direction: column;
   width: 100%;
-  height: 90%;
-  max-height: 90%;
+  height: 87.3%;
   overflow: auto;
 }
-
-.app .gameFinding .resultsDiv .results {
-  float: left;
-  margin: 3vh;
-  -webkit-box-shadow: 0.7vh 0.7vh rgba(0, 0, 0, 0.1);
-          box-shadow: 0.7vh 0.7vh rgba(0, 0, 0, 0.1);
-  width: 400px;
-  height: 263.3px;
-  background: royalblue;
-  border: black 0.1vh solid;
+.app .gameFinding .resultsDiv .resultsFlex {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+.app .gameFinding .resultsDiv .resultsFlex .results {
+  margin: 0.5%;
+  box-shadow: 0.4rem 0.4rem rgba(0, 0, 0, 0.1);
+  width: 23.5rem;
+  height: fit-content;
+  background-color: royalblue;
+  border: black 0.1rem solid;
   border-bottom: none;
 }
-
-.app .gameFinding .resultsDiv .results .result {
-  padding: 0.4vh;
+.app .gameFinding .resultsDiv .resultsFlex .results .result {
+  padding: 1.2%;
   background: royalblue;
   color: #fff;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  border-bottom: black 0.1vh solid;
+  justify-content: space-between;
+  border-bottom: black 0.1rem solid;
 }
-
-.app .gameFinding .resultsDiv .results .result .textOverflowResult {
+.app .gameFinding .resultsDiv .resultsFlex .results .result .textOverflowResult {
   display: inline-block;
   padding-right: 2%;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
 }
-
-.app .gameFinding .resultsDiv .results .result img {
+.app .gameFinding .resultsDiv .resultsFlex .results .result img {
   width: 20%;
 }
-
-.app .gameFinding .resultsDiv .results .result #urlResult {
-  height: 100%;
-}
-
-.app .gameFinding .resultsDiv .results .gameSelect {
+.app .gameFinding .resultsDiv .resultsFlex .results .gameSelect {
   height: 100vh;
   width: 100vw;
   position: absolute;
@@ -148,100 +129,102 @@
   top: 0;
   background: rgba(0, 0, 0, 0.5);
 }
-
-.app .gameFinding .resultsDiv .results .gameSelect .gameSelectDiv {
+.app .gameFinding .resultsDiv .resultsFlex .results .gameSelect .gameSelectDiv {
+  height: fit-content;
+  max-height: 80%;
+  width: 65%;
   position: fixed;
   top: 50%;
   left: 50%;
-  -webkit-transform: translate(-50%, -50%);
-          transform: translate(-50%, -50%);
-  height: -webkit-fit-content;
-  height: -moz-fit-content;
-  height: fit-content;
-  width: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #2C2F33;
   background-repeat: no-repeat;
   background-size: cover;
+  background-position: center center;
   color: #fff;
   text-align: center;
   font-size: 120%;
-  margin: 10px;
+  overflow: auto;
 }
-
-.app .gameFinding .resultsDiv .results .gameSelect .gameSelectDiv .blackOpacity {
+.app .gameFinding .resultsDiv .resultsFlex .results .gameSelect .gameSelectDiv .blackOpacity {
   border: 0.3vh solid black;
-  border-collapse: collapse;
   height: 100%;
-  width: 99.5%;
-  max-width: 100%;
+  width: 100%;
   background: rgba(0, 0, 0, 0.6);
 }
-
-.app .gameFinding .resultsDiv .results .gameSelect .gameSelectDiv .blackOpacity div {
+.app .gameFinding .resultsDiv .resultsFlex .results .gameSelect .gameSelectDiv .blackOpacity div {
   padding: 10px;
 }
-
-.app .gameFinding .resultsDiv .results .gameSelect .gameSelectDiv .blackOpacity p {
+.app .gameFinding .resultsDiv .resultsFlex .results .gameSelect .gameSelectDiv .blackOpacity p {
   padding: 1%;
 }
-
-.app .gameFinding .resultsDiv .results .gameSelect .gameSelectDiv .blackOpacity .gameSelectMiddle {
-  display: -webkit-box;
-  display: -ms-flexbox;
+.app .gameFinding .resultsDiv .resultsFlex .results .gameSelect .gameSelectDiv .blackOpacity .gameSelectMiddle {
   display: flex;
-  -webkit-box-pack: space-evenly;
-      -ms-flex-pack: space-evenly;
-          justify-content: space-evenly;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  justify-content: space-evenly;
+  align-items: center;
   border-bottom: 0.2vh solid black;
 }
-
-.app .gameFinding .resultsDiv .results .gameSelect .gameSelectDiv .blackOpacity .gameSelectMiddle div {
+.app .gameFinding .resultsDiv .resultsFlex .results .gameSelect .gameSelectDiv .blackOpacity .gameSelectMiddle #gameSelectName {
+  font-size: 150%;
+}
+.app .gameFinding .resultsDiv .resultsFlex .results .gameSelect .gameSelectDiv .blackOpacity .gameSelectMiddle div {
   width: 100%;
 }
-
-.app .gameFinding .resultsDiv .results .gameSelect .gameSelectDiv .blackOpacity .gameSelectMiddle div img {
-  width: 60%;
+.app .gameFinding .resultsDiv .resultsFlex .results .gameSelect .gameSelectDiv .blackOpacity .gameSelectMiddle #coverGameSelect {
+  width: 100%;
 }
-
-.app .gameFinding .resultsDiv .results .gameSelect .gameSelectDiv .blackOpacity .gameSelectMiddle #gameSelectSummary #gameSelectSummaryText {
+.app .gameFinding .resultsDiv .resultsFlex .results .gameSelect .gameSelectDiv .blackOpacity .gameSelectMiddle #coverGameSelect img {
+  width: 10rem;
+}
+.app .gameFinding .resultsDiv .resultsFlex .results .gameSelect .gameSelectDiv .blackOpacity .gameSelectMiddle #gameSelectSummary #gameSelectSummaryText {
   color: #dfdfdf;
 }
-
-.app .gameFinding .resultsDiv .results .gameSelect .gameSelectDiv .blackOpacity #gameSelectScreenshots {
+.app .gameFinding .resultsDiv .resultsFlex .results .gameSelect .gameSelectDiv .blackOpacity #gameSelectScreenshots {
   overflow: auto;
   border: none;
 }
-
-.app .gameFinding .resultsDiv .results .gameSelect .gameSelectDiv .blackOpacity #gameSelectScreenshots #screenshots {
+.app .gameFinding .resultsDiv .resultsFlex .results .gameSelect .gameSelectDiv .blackOpacity #gameSelectScreenshots #screenshots {
   border: none;
   display: inline-block;
 }
-
-.app .gameFinding .resultsDiv .results .gameSelect .gameSelectDiv .blackOpacity #gameSelectScreenshots #screenshots img {
+.app .gameFinding .resultsDiv .resultsFlex .results .gameSelect .gameSelectDiv .blackOpacity #gameSelectScreenshots #screenshots img {
   width: 100%;
 }
-
-.app .gameFinding .resultsDiv .results .result:hover {
+@media only screen and (max-width: 768px) {
+  .app .gameFinding .resultsDiv .resultsFlex .results .gameSelect .gameSelectDiv {
+    border-top: 0.3vh solid black;
+    border-bottom: 0.3vh solid black;
+    width: 90%;
+    margin: auto;
+  }
+  .app .gameFinding .resultsDiv .resultsFlex .results .gameSelect .gameSelectDiv .blackOpacity {
+    border-top: none;
+    border-bottom: none;
+  }
+  .app .gameFinding .resultsDiv .resultsFlex .results .gameSelect .gameSelectDiv .blackOpacity .gameSelectMiddle {
+    flex-wrap: wrap;
+  }
+  .app .gameFinding .resultsDiv .resultsFlex .results .gameSelect .gameSelectDiv .blackOpacity .gameSelectMiddle #coverGameSelect {
+    text-align: center;
+  }
+  .app .gameFinding .resultsDiv .resultsFlex .results .gameSelect .gameSelectDiv .blackOpacity .gameSelectMiddle #coverGameSelect img {
+    width: 5rem;
+  }
+}
+.app .gameFinding .resultsDiv .resultsFlex .results .result:hover {
   background: #2746a0;
 }
-
 .app .gameFinding .resultsDiv .noResult {
   text-align: center;
-  color: #fff;
-  display: -webkit-box;
-  display: -ms-flexbox;
+  color: #000;
   display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  justify-content: center;
 }
-
 .app .gameFinding .resultsDiv .noResult p {
   background: royalblue;
   border: 0.2vh solid black;
   width: 50%;
   padding: 1vh;
 }
+
 /*# sourceMappingURL=style.css.map */

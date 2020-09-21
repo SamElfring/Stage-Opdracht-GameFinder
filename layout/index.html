@@ -17,7 +17,6 @@
 				</div>
 				<div class="topBarFilters"></div>
 			</div>
-			<div class="blackBar"></div>
 			<div class="gameFinding">
 				<div class="filters">
 					<div class="filter" id="nameFilter">
@@ -73,80 +72,83 @@
 					<div class="noResult" v-if="noResult">
 						<p>Geen spellen gevonden</p>
 					</div>
-					<div class="results" v-for="item in arrayResponse" v-if="arrayResponse.length != 0 && !noResult" @click="ShowGameSelect(item.name)">
-						<div class="result">
-							<p class="textOverflowResult" id="nameResult">{{ item.name }}</p>
-							<p id="filterName">Naam</p>
-						</div>
-						<div class="result">
-							<img :src="item.url" onerror="this.src='onerrorIMG.png'">
-							<p id="filterName">Cover</p>
-						</div>
-						<div class="result">
-							<p class="textOverflowResult" id="genreResult">{{ item.genre }}</p>
-							<p id="filterName">Genre(s)</p>
-						</div>
-						<div class="result">
-							<p class="textOverflowResult" id="dateResult">{{ item.date }}</p>
-							<p id="filterName">Release Datum</p>
-						</div>
-						<div class="result">
-							<p class="textOverflowResult" id="companyResult">{{ item.company }}</p>
-							<p id="filterName">Makers</p>
-						</div>
-						<div class="result">
-							<p class="textOverflowResult" id="platformResult">{{ item.platform }}</p>
-							<p id="filterName">Platformen</p>
-						</div>
-						<div class="result">
-							<p class="textOverflowResult" id="ratingResult">{{ item.rating }}</p>
-							<p id="filterName">Rating</p>
-						</div>
-						<div :id="item.name" class="gameSelect" v-show>
-							<div class="gameSelectDiv" :style="{ backgroundImage: 'url(' + item.screenshotsGameSelect + ')' }">
-								<div class="blackOpacity">
-									<div class="gameSelectMiddle">
-										<div>
-											<img :src="item.coverGameSelect" onerror="this.src='onerrorIMG.png'">
+					<div class="resultsFlex">
+
+						<div class="results" v-for="item in arrayResponse" v-if="arrayResponse.length != 0 && !noResult" @click="ShowGameSelect(item.name)">
+							<div class="result">
+								<p class="textOverflowResult" id="nameResult">{{ item.name }}</p>
+								<p id="filterName">Naam</p>
+							</div>
+							<div class="result">
+								<img :src="item.url" onerror="this.src='onerrorIMG.png'">
+								<p id="filterName">Cover</p>
+							</div>
+							<div class="result">
+								<p class="textOverflowResult" id="genreResult">{{ item.genre }}</p>
+								<p id="filterName">Genre(s)</p>
+							</div>
+							<div class="result">
+								<p class="textOverflowResult" id="dateResult">{{ item.date }}</p>
+								<p id="filterName">Release Datum</p>
+							</div>
+							<div class="result">
+								<p class="textOverflowResult" id="companyResult">{{ item.company }}</p>
+								<p id="filterName">Makers</p>
+							</div>
+							<div class="result">
+								<p class="textOverflowResult" id="platformResult">{{ item.platform }}</p>
+								<p id="filterName">Platformen</p>
+							</div>
+							<div class="result">
+								<p class="textOverflowResult" id="ratingResult">{{ item.rating }}</p>
+								<p id="filterName">Rating</p>
+							</div>
+							<div :id="item.name" class="gameSelect" v-show>
+								<div class="gameSelectDiv" :style="{ backgroundImage: 'url(' + item.screenshotsGameSelect + ')' }">
+									<div class="blackOpacity">
+										<div class="gameSelectMiddle">
+											<div id="coverGameSelect">
+												<img :src="item.coverGameSelect" onerror="this.src='onerrorIMG.png'">
+											</div>
+											<div>
+												<p id="gameSelectName">{{ item.name }}</p>
+											</div>
+											<div id="gameSelectRating">
+												<p>Rating:</p>
+												<p>{{ item.rating }}</p>
+											</div>
 										</div>
-										<div>
-											<p id="gameSelectName">{{ item.name }}</p>
+										<div class="gameSelectMiddle">
+											<div id="gameSelectDate">
+												<p>Release Datum:</p>
+												<p>{{ item.date }}</p>
+											</div>
+											<div id="gameSelectGenre">
+												<p>Genre('s):</p>
+												<p>{{ item.genre }}</p>
+											</div>
 										</div>
-										<div id="gameSelectRating">
-											<p>Rating:</p>
-											<p>{{ item.rating }}</p>
+										<div class="gameSelectMiddle">
+											<div id="gameSelectCompany">
+												<p>Makers:</p>
+												<p>{{ item.company }}</p>
+											</div>
+											<div id="gameSelectPlatform">
+												<p>Platformen:</p>
+												<p>{{ item.platform }}</p>
+											</div>
 										</div>
-									</div>
-									<div class="gameSelectMiddle">
-										<div id="gameSelectDate">
-											<p>Release Datum:</p>
-											<p>{{ item.date }}</p>
+										<div class="gameSelectMiddle"  v-if="item.summary">
+											<div id="gameSelectSummary">
+												<p>Beschrijving:</p>
+												<p id="gameSelectSummaryText">{{ item.summary }}</p>
+											</div>
 										</div>
-										<div id="gameSelectGenre">
-											<p>Genre('s):</p>
-											<p>{{ item.genre }}</p>
-										</div>
-									</div>
-									<div class="gameSelectMiddle">
-										<div id="gameSelectCompany">
-											<p>Makers:</p>
-											<p>{{ item.company }}</p>
-										</div>
-										<div id="gameSelectPlatform">
-											<p>Platformen:</p>
-											<p>{{ item.platform }}</p>
-										</div>
-									</div>
-									<div class="gameSelectMiddle"  v-if="item.summary">
-										<div id="gameSelectSummary">
-											<p>Beschrijving:</p>
-											<p id="gameSelectSummaryText">{{ item.summary }}</p>
-										</div>
-									</div>
-									<div id="gameSelectScreenshots" v-if="item.screenshots">
-										<p>Screenshots:</p>
-										<div id="screenshots" v-for="screenshot in item.screenshots.slice(0,4)">
-											<img :src="screenshot" alt="Screenshot niet beschikbaar">
+										<div id="gameSelectScreenshots" v-if="item.screenshots">
+											<p>Screenshots:</p>
+											<div id="screenshots" v-for="screenshot in item.screenshots.slice(0,4)">
+												<img :src="screenshot" alt="Screenshot niet beschikbaar">
+											</div>
 										</div>
 									</div>
 								</div>

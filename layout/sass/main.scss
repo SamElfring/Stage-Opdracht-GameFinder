@@ -1,0 +1,245 @@
+@tailwind base;
+
+@tailwind components;
+
+@tailwind utilities;
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+html, body {
+	height: 100%;
+}
+
+// Variables
+$mobileBreakpoint: 768px;
+
+// Fonts
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
+
+.app {
+	font-family: 'Ubuntu', sans-serif;
+	width: 100vw;
+	height: 100vh;
+	background: linear-gradient(to bottom, lightgray, rgb(167, 164, 164));
+	overflow: hidden;
+	.topBar {
+		width: 100%;
+		height: 3rem;
+		background: #fff;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		.title {
+			text-align: center;
+			font-size: 150%;
+		}
+	}
+	.gameFinding {
+		height: 100%;
+		width: 100%;
+		.filters {
+			display: flex;
+			justify-content: space-evenly;
+			flex-wrap: wrap;
+			
+			border: 0.2rem solid black;
+			border-left: none;
+			border-right: none;
+			text-align: center;
+			width: 100%;
+			height: fit-content;
+			background: royalblue;
+			color: #fff;
+			.filter {
+				padding: 1%;
+				input, select {
+					margin-top: 3%;
+				}
+				input {
+					padding-left: 2%;
+				}
+			}
+			#dateFilter {
+				input {
+					width: 20%;
+				}
+			}
+			#ratingFilter {
+				input {
+					width: 40%;
+					text-align: right;
+					padding-right: 2%;
+				}
+			}
+		}
+		.searchButton {
+			height: 2rem;
+			width: 100%;
+			border-bottom: 0.2rem solid black;
+			#searchButtonID {
+				color: #fff;
+				height: 100%;
+				width: 100%;
+				border: none;
+				font-size: 120%;
+				font-weight: 900;
+				background: lightslategray;
+			}
+			#searchButtonID:hover {
+				background: rgb(40, 86, 227);
+			}
+		}
+
+		.resultsDiv {
+			display: flex;
+			flex-direction: column;
+			width: 100%;
+			height: 87.3%;
+			overflow: auto;
+			.resultsFlex {
+				display: flex;
+				justify-content: space-around;
+				flex-wrap: wrap;
+				.results {				
+					margin: 0.5%;
+					box-shadow: 0.4rem 0.4rem rgba($color: #000000, $alpha: 0.1);
+					width: 23.5rem;
+					height: fit-content;
+					background-color: royalblue;
+					border: black 0.1rem solid;
+					border-bottom: none;
+					.result {
+						padding: 1.2%;
+						background: royalblue;
+						color: #fff;
+						display: flex;
+						justify-content: space-between;
+						border-bottom: black 0.1rem solid;
+						.textOverflowResult {
+							display: inline-block;
+							padding-right: 2%;
+							overflow: hidden;
+							white-space: nowrap;
+							text-overflow: ellipsis;
+						}
+						img {
+							width: 20%
+						}
+					}
+					.gameSelect {
+						height: 100vh;
+						width: 100vw;
+						position: absolute;
+						left: 0;
+						top: 0;
+						background: rgba($color: #000000, $alpha: 0.5);
+						.gameSelectDiv {
+							height: fit-content;
+							max-height: 80%;
+							width: 65%;
+
+							position: fixed;
+							top: 50%;
+							left: 50%;
+							transform: translate(-50%, -50%);
+							
+							background-color: #2C2F33;
+							background-repeat: no-repeat;
+							background-size: cover;
+							background-position: center center;
+							color: #fff;
+							text-align: center;
+							font-size: 120%;
+							overflow: auto;
+							.blackOpacity {
+								border: 0.3vh solid black;
+								height: 100%;
+								width: 100%;
+								background: rgba($color: #000000, $alpha: 0.6);
+								div {
+									padding: 10px;
+								}
+								p {
+									padding: 1%;
+								}
+								.gameSelectMiddle {
+									display: flex;
+									justify-content: space-evenly;
+									align-items: center;
+									border-bottom: 0.2vh solid black;
+									#gameSelectName {
+										font-size: 150%;
+									}
+									div {
+										width: 100%;
+									}
+									#coverGameSelect {
+										width: 100%;
+										img {
+											width: 10rem;
+										}
+									}
+									#gameSelectSummary {
+										#gameSelectSummaryText {
+											color: #dfdfdf;
+										}
+									}
+								}
+								#gameSelectScreenshots {
+									overflow: auto;
+									border: none;
+									#screenshots {
+										border: none;
+										display: inline-block;
+										img {
+											width: 100%;
+										}
+									}
+								}
+							}
+						}
+						@media only screen and (max-width: $mobileBreakpoint) {
+							.gameSelectDiv {
+								border-top: 0.3vh solid black;
+								border-bottom: 0.3vh solid black;
+								width: 90%;
+								margin: auto;
+								.blackOpacity {
+									border-top: none;
+									border-bottom: none;
+									.gameSelectMiddle {
+										flex-wrap: wrap;
+										#coverGameSelect {
+											text-align: center;
+											img {
+												width: 5rem;
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+					.result:hover {
+						background: rgb(39, 70, 160);
+					}
+				}
+			}
+			.noResult {
+				text-align: center;
+				color: #000;
+				display: flex;
+				justify-content: center;
+				p {
+					background: royalblue;
+					border: 0.2vh solid black;
+					width: 50%;
+					padding: 1vh;
+				}
+			}
+		}
+	}
+}

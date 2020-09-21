@@ -53,7 +53,7 @@ var app = new Vue({
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',
-                    'user-key': '4a747b3742d8c95f07ec185f1a0e3d33'
+                    'user-key': 'vul-hier-je-eigen-key-in'
                 },
                 // Set data that the api returns
                 data: "fields name,genres.name,summary,rating,popularity,platforms,game_engines.name,release_dates.human,release_dates.date,category,involved_companies.company.name,cover.url,screenshots.url,platforms.abbreviation;" +
@@ -184,11 +184,19 @@ var app = new Vue({
                         var name = response[i].name;
                     } catch(err){var name = "Onbekend"};                    // If no value is found set to "Onbekend".
                     try {
-                        var url = response[i].cover.url;
+                        var url = "https:" + response[i].cover.url;
                         var coverGameSelect = url.split("/");
                         coverGameSelect[6] = "t_cover_big";                             // Getting the bigger cover
                         coverGameSelect = coverGameSelect.join("/");
-                    } catch(err){var url = ""; var coverGameSelect = ""};
+                    } catch(err){
+                        try {
+                            var url = response[i].screenshots[0].url;
+                            var coverGameSelect = url;
+                        } catch(err){
+                            var url = "";
+                            var coverGameSelect = "";
+                        }
+                    };
                     try {
                         var screenshotsLength = response[i].screenshots;
                         var screenshots = [];
@@ -196,7 +204,7 @@ var app = new Vue({
                             screenshots.push(response[i].screenshots[s].url);
                         }
                         var screenshotsGameSelect = screenshots[0].split("/");
-                        screenshotsGameSelect[6] = "t_screenshot_huge";
+                        screenshotsGameSelect[6] = "t_screenshot_big";
                         screenshotsGameSelect = screenshotsGameSelect.join("/");
                     } catch(err){var screenshots = ""; var screenshotsGameSelect = "";}
                     try {

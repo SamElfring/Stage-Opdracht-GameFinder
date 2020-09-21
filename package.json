@@ -1,8 +1,18 @@
 {
+  "name": "GameFinder",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "scss": "sass layout/sass/main.scss layout/style.css",
+    "tailwind": "tailwind build layout/style.css -o layout/style.css"
+  },
+  "license": "MIT",
   "dependencies": {
     "axios": "^0.20.0",
-    "google-translate": "^3.0.0",
     "jquery": "^3.5.1",
+    "live-server": "^1.2.1",
+    "sass": "^1.26.11",
+    "tailwindcss": "^1.8.10",
     "vue": "^2.6.12"
   }
 }
